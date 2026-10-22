@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>About Me</title>
+
+<style>
+body{
+    background-color:#e6f7ff;
+    font-family:Arial,sans-serif;
+    margin:30px;
+}
+
+.navbar{
+    background-color:navy;
+    padding:10px;
+    text-align:center;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.navbar button{
+    background-color:lightblue;
+    border:none;
+    padding:10px 20px;
+    margin:5px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.navbar button:hover{
+    background-color:white;
+}
+
+h1{
+    color:darkblue;
+    text-align:center;
+    background-color:lightblue;
+    padding:15px;
+    border-radius:15px;
+}
+
+h2{
+    color:purple;
+}
+
+.box{
+    background-color:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:5px 5px 10px gray;
+}
+
+.page{
+    display:none;
+}
+
+#home{
+    display:block;
+}
+
+ul,ol{
+    background-color:#f7fbff;
+    padding:20px;
+    border-radius:10px;
+}
+
+.game-button{
+    padding:15px;
+    margin:10px;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#result{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.daily-message{
+    color:darkgreen;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="navbar">
+    <button onclick="showPage('home')">🏠 Home</button>
+    <button onclick="showPage('game')">🫁 Quiz</button>
+</div>
+
+<div id="home" class="page">
+
+<h1>🌟 About Me 🌟</h1>
+
+<div class="box">
+
+<p>Hello! I am Anonymous.</p>
+
+<p>When I grow up, I want to be a pulmonologist.</p>
+
+<p>I am interested in learning about the human body and how it works.</p>
+
+<p>I enjoy spending time with my family and learning how to code.</p>
+
+<h2>❤️ Things I Like</h2>
+
+<ul>
+<li>🍿 Snacks</li>
+<li>🫁 The Human Body</li>
+<li>👨‍👩‍👧‍👦 Family</li>
+<li>💻 Coding</li>
+</ul>
+
+<h2>🚀 My Future Goals</h2>
+
+<ol>
+<li>🎓 Graduate from High School</li>
+<li>🏫 Go to University</li>
+<li>📚 Attend Medical School</li>
+<li>🩺 Complete Medical Residency</li>
+<li>🫁 Become a Pulmonologist</li>
+</ol>
+
+</div>
+</div>
+
+<div id="game" class="page">
+
+<h1>🫁 Respiratory Quiz of the Day 🫁</h1>
+
+<div class="box">
+
+<p id="question"></p>
+
+<button class="game-button" id="button1"></button>
+<button class="game-button" id="button2"></button>
+<button class="game-button" id="button3"></button>
+
+<p id="result"></p>
+
+<p class="daily-message">
+📅 Come back tomorrow for a new question!
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function showPage(pageId){
+    document.getElementById("home").style.display="none";
+    document.getElementById("game").style.display="none";
+    document.getElementById(pageId).style.display="block";
+}
+
+const questions = [
+
+{
+question:"Which lung has three lobes?",
+answers:["Left Lung","Right Lung","Both Lungs"],
+correct:"Right Lung"
+},
+
+{
+question:"What are the tiny air sacs in the lungs called?",
+answers:["Alveoli","Neurons","Villi"],
+correct:"Alveoli"
+},
+
+{
+question:"What gas do humans breathe out?",
+answers:["Oxygen","Carbon Dioxide","Nitrogen"],
+correct:"Carbon Dioxide"
+},
+
+{
+question:"Which doctor specializes in lung diseases?",
+answers:["Cardiologist","Pulmonologist","Neurologist"],
+correct:"Pulmonologist"
+},
+
+{
+question:"What muscle helps the lungs expand when breathing?",
+answers:["Diaphragm","Bicep","Hamstring"],
+correct:"Diaphragm"
+},
+
+{
+question:"Which side of the chest contains most of the heart?",
+answers:["Left","Right","Center"],
+correct:"Left"
+},
+
+{
+question:"What is the main function of red blood cells in the lungs?",
+answers:["Carry Oxygen","Digest Food","Fight Disease"],
+correct:"Carry Oxygen"
+},
+
+{
+question:"The windpipe is also called the...",
+answers:["Trachea","Esophagus","Aorta"],
+correct:"Trachea"
+},
+
+{
+question:"Which condition causes the airways to become inflamed and narrow?",
+answers:["Asthma","Diabetes","Arthritis"],
+correct:"Asthma"
+},
+
+{
+question:"Lungs belong to which body system?",
+answers:["Digestive System","Respiratory System","Skeletal System"],
+correct:"Respiratory System"
+}
+
+];
+
+const dayNumber = Math.floor(Date.now()/86400000);
+const todaysQuestion = questions[dayNumber % questions.length];
+
+document.getElementById("question").innerHTML = todaysQuestion.question;
+document.getElementById("button1").innerHTML = todaysQuestion.answers[0];
+document.getElementById("button2").innerHTML = todaysQuestion.answers[1];
+document.getElementById("button3").innerHTML = todaysQuestion.answers[2];
+
+document.getElementById("button1").onclick = function(){
+checkAnswer(todaysQuestion.answers[0]);
+};
+
+document.getElementById("button2").onclick = function(){
+checkAnswer(todaysQuestion.answers[1]);
+};
+
+document.getElementById("button3").onclick = function(){
+checkAnswer(todaysQuestion.answers[2]);
+};
+
+function checkAnswer(answer){
+
+if(answer === todaysQuestion.correct){
+
+document.getElementById("result").innerHTML =
+"✅ Correct! Great job!";
+
+document.getElementById("result").style.color = "green";
+
+}else{
+
+document.getElementById("result").innerHTML =
+"❌ Not quite. Try again!";
+
+document.getElementById("result").style.color = "red";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
